@@ -1,0 +1,219 @@
+body, html {
+    height: 85%;
+    margin: 0;
+    font-family: 'Gatter Sans', sans-serif;
+    font-weight: 300; /* Lighter font weight */
+    background-color: #000; /* Background color is black */
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* Align items to the center of the container */
+    padding: 20px 60px; /* Remove horizontal padding */
+    gap: 0; /* Set gap to 0, we'll control spacing with margin */
+}
+
+.left-section, .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto; /* Center these sections */
+}
+
+
+.left-section {
+    flex: 1; /* Takes up 50% of the container */
+}
+
+.right-section {
+    flex: 1; /* Takes up 50% of the container */
+}
+
+.description-box, .social-media-box {
+    width: 100%; /* Adjust the width to account for the gap */
+    margin-top: 0; /* Remove the top margin if it's the first element */
+}
+
+.header {
+    width: 100%; /* Full width */
+    text-align: left; /* Align text to the left */
+}
+
+.profile-container {
+    display: flex; /* Arrange items in a row */
+    align-items: flex-start; /* Align items to the top */
+    justify-content: flex-start; /* Align items to the left */
+    margin-bottom: 20px; /* Space below the profile section */
+}
+
+.description-box {
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    height: 370px;
+    margin-top: 227px;
+    margin-left: 50px;
+    color: white;
+}
+
+.chat-box {
+    font-family: 'Gatter Sans', sans-serif; 
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    height: 30px;
+    width: 100%; /* This will match the width of .description-box */
+    height: 108px;
+    margin-top: 20px; /* Space between the two boxes */
+    margin-left: 100px; /* Center the box */
+    margin-right: auto; /* Center the box */
+    color: white;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+}
+
+.chat-box:hover {
+    background-color: rgba(50, 50, 50, 0.8); /* Lighter background on hover */
+    cursor: pointer;
+}
+
+/* Style for the text inside the chat-box */
+.chat-box p {
+    font-weight: 400; /* Lighter font weight, similar to the body text */
+    font-size: 1.75em; /* Increased size for the heading */
+    line-height: 1.0; /* Adjusted line-height for heading */
+    margin-top: 1; /* Remove top margin if present */
+    margin-bottom: 0.5em; /* Keep some space below the heading */
+    text-align: center; /* Center the text within the chat-box */
+}
+
+
+.social-media-box {
+    /* General style for LinkedIn, GitHub, and Twitter boxes */
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px; /* This sets the space between the LinkedIn box and the container of GitHub and Twitter boxes */
+    width: 75%; /* Increase the width to 100% of its parent container */
+    height: 150px; /* Increase the height */
+}
+
+.social-media-icon {
+    /* Centering the icon with flexbox */
+    margin: 0 auto; /* Centers the icon horizontally */
+    display: block; /* Change display to block for centering */
+    width: 60px; /* Set the width of the icon */
+    height: 60px; /* Set the height of the icon */
+    /* margin-bottom property is not needed since we are centering the icon */
+}
+
+.gmail-icon {
+    /* Centering the icon with flexbox */
+    margin: 0 auto; /* Centers the icon horizontally */
+    display: block; /* Change display to block for centering */
+    width: 70px; /* Set the width of the icon */
+    height: 55px; /* Set the height of the icon */
+    /* margin-bottom property is not needed since we are centering the icon */
+}
+
+.social-media-handle {
+    font-size: 1.25em; /* Increased font size for visibility */
+    text-align: left; /* Align text to the left */
+    margin-top: auto; /* Push to the bottom */
+    padding-left: 60px; /* Give space for the icon */
+}
+
+/* If you have other elements (like links) that need specific styles, add them here */
+.social-media-link {
+    color: white; /* White text color */
+    text-decoration: none; /* No underline */
+    font-weight: 300; /* Light font weight for consistency */
+}
+
+.social-media-box:hover {
+    background-color: rgba(50, 50, 50, 0.8); /* Lighter background on hover */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.right-section {
+    /* Align this section's children (boxes) in a column */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the child elements horizontally */
+    width: 47%; /* Set the width to match the LinkedIn box */
+    margin-top: 225px; /* Adjust the margin to position it closer to the profile box if needed */
+}
+
+
+.header-container {
+    display: flex;
+    align-items: center; /* Align the image and heading in one line */
+    margin-bottom: 20px; /* Space between the header and paragraph */
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+/* Container for GitHub and Twitter boxes */
+.social-media-container {
+    /* Container holding both GitHub and Twitter boxes */
+    display: flex;
+    justify-content: space-around; /* Evenly space the inner boxes */
+    gap: 20px; /* Space between GitHub and Twitter boxes */
+    margin-top: 0px; /* Pull the container up to reduce space between it and the LinkedIn box */
+}
+
+/* GitHub and Twitter box styling */
+.social-media-container .social-media-box {
+    /* Specific style for GitHub and Twitter boxes */
+    width: 220px; /* Increase the width to take up half of the parent container minus the gap */
+    height: 150px; /* Increase the height */
+    margin-top: 5px; /* Adjust top margin to move closer to the LinkedIn box */
+}
+
+/* Add additional styles for the text and spacing */
+h1 {
+    font-weight: 400; /* Lighter font weight, similar to the body text */
+    font-size: 1.75em; /* Increased size for the heading */
+    line-height: 0.5; /* Adjusted line-height for heading */
+    margin-top: 0; /* Remove top margin if present */
+    margin-bottom: 0.5em; /* Keep some space below the heading */
+}
+
+p {
+    font-size: 1.25em; /* Increased font size for the paragraph */
+    margin-top: 0; /* Remove top margin for paragraph if necessary */
+    margin-bottom: 1.50em; /* Add some space below each paragraph */
+}
+
+.stanford-link {
+    color: #847a7a; /* This is Stanford's maroon red color */
+    text-decoration: none; /* Removes the underline from links */
+}
+
+.stanford-link:hover {
+    color: #8C1515; /* This is Stanford's maroon red color */
+}
+
+a {
+    color: #0d6efd; /* Example link color, choose what fits your design */
+    text-decoration: none; /* No underline */
+    font-weight: 300; /* Consistent with the theme of light font weights */
+}
+
