@@ -21,6 +21,9 @@ body, html {
     flex-direction: column;
     align-items: flex-start;
     margin: auto; /* Center these sections */
+    /*margin-top: 0;
+    margin-left: auto;
+    margin-right: auto; (for later development*/
 }
 
 
@@ -85,7 +88,7 @@ body, html {
     cursor: pointer;
 }
 
-/* Style for the text inside the chat-box */
+
 .chat-box p {
     font-weight: 400; /* Lighter font weight, similar to the body text */
     font-size: 1.75em; /* Increased size for the heading */
@@ -112,21 +115,17 @@ body, html {
 }
 
 .social-media-icon {
-    /* Centering the icon with flexbox */
     margin: 0 auto; /* Centers the icon horizontally */
     display: block; /* Change display to block for centering */
     width: 60px; /* Set the width of the icon */
     height: 60px; /* Set the height of the icon */
-    /* margin-bottom property is not needed since we are centering the icon */
 }
 
 .gmail-icon {
-    /* Centering the icon with flexbox */
     margin: 0 auto; /* Centers the icon horizontally */
     display: block; /* Change display to block for centering */
     width: 70px; /* Set the width of the icon */
     height: 55px; /* Set the height of the icon */
-    /* margin-bottom property is not needed since we are centering the icon */
 }
 
 .social-media-handle {
@@ -136,9 +135,8 @@ body, html {
     padding-left: 60px; /* Give space for the icon */
 }
 
-/* If you have other elements (like links) that need specific styles, add them here */
 .social-media-link {
-    color: white; /* White text color */
+    color: grey; /* White text color */
     text-decoration: none; /* No underline */
     font-weight: 300; /* Light font weight for consistency */
 }
@@ -149,7 +147,6 @@ body, html {
 }
 
 .right-section {
-    /* Align this section's children (boxes) in a column */
     display: flex;
     flex-direction: column;
     align-items: center; /* Center-align the child elements horizontally */
@@ -213,11 +210,67 @@ p {
     color: #8C1515; /* This is Stanford's maroon red color */
 }
 
+.SEP-link {
+    color: #847a7a; /* This is Stanford's maroon red color */
+    text-decoration: none; /* Removes the underline from links */
+}
+
+.SEP-link:hover {
+    color: #1eab4b; /* This is Stanford's maroon red color */
+}
+
+.conrad-link {
+    color: #847a7a; /* This is Stanford's maroon red color */
+    text-decoration: none; /* Removes the underline from links */
+}
+
+.conrad-link:hover {
+    color: #1d3dba; /* This is Stanford's maroon red color */
+}
+
+
 a {
     color: #0d6efd; /* Example link color, choose what fits your design */
     text-decoration: none; /* No underline */
     font-weight: 300; /* Consistent with the theme of light font weights */
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Stack the children vertically */
+    }
+
+    .description-box {
+        box-sizing: border-box; /* Makes sure padding is included in the width */
+        padding: 20px; /* Add padding to ensure text doesn't touch the edges */
+        margin-top: 60px; /* Reduced top margin */
+        margin-bottom: auto; /* Add bottom margin */
+        height: auto; /* Allow the box to grow as tall as it needs */
+        margin-left: auto; /* Center the box horizontally */
+        margin-right: auto; /* Center the box horizontally */
+    }
+
+    .left-section, .right-section {
+        width: 100%; /* Full width for both sections */
+        align-items: center; /* Center align items in both sections */
+    }
+
+    .right-section {
+        display: flex; /* Make sure it's displayed as a flex container */
+        flex-direction: column; /* Stack the social media icons vertically */
+        align-items: center; /* Center the icons */
+    }
+
+    .social-media-container {
+        justify-content: center; /* Center the social media containers */
+    }
+
+    .social-media-box {
+        width: auto; /* Allow the boxes to fit content */
+        margin: 10px; /* Add some space around the boxes */
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
     .container {
