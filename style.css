@@ -21,14 +21,25 @@ body, html {
     flex-direction: column;
     align-items: flex-start;
     margin: auto; /* Center these sections */
+    justify-content: center; /* Centers the boxes vertically */
+    width: 50%;
     /*margin-top: 0;
     margin-left: auto;
     margin-right: auto; (for later development*/
 }
 
+.description-box {
+    width: calc(50% - 40px); /* Adjust width to account for margin */
+    margin: 20px; /* Add margin to create space around the boxes */
+    height: auto; /* Adjust height to content */
+    text-align: justify;
+}
 
 .left-section {
-    flex: 1; /* Takes up 50% of the container */
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap; /* Allow boxes to wrap onto the next line */
+    gap: 20px; /* Space between the boxes */
 }
 
 .right-section {
@@ -61,6 +72,32 @@ body, html {
     height: 370px;
     margin-top: 227px;
     margin-left: 50px;
+    color: white;
+}
+
+.research-box, .projects-box {
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 20px 0; /* Provides space between the boxes and any other elements */
+    width: 90%; /* Makes the box width relative to its parent section */
+    margin-left: 50px;
+}
+
+
+.research-box h2, .projects-box h2 {
+    white-space: normal;
+    font-weight: 400; /* Lighter font weight, similar to the body text */
+    font-size: 1.75em; /* Increased size for the heading */
+    line-height: 0.5; /* Adjusted line-height for heading */
+    margin-top: 0; /* Remove top margin if present */
+    margin-bottom: 0.5em; /* Keep some space below the heading */
+}
+
+.research-box p, .projects-box p {
+    font-size: 1em; /* Assuming the paragraph in profile is 1em */
+    margin: 0 0 10px 0; /* Spacing between paragraphs */
     color: white;
 }
 
@@ -248,6 +285,11 @@ a {
         height: auto; /* Allow the box to grow as tall as it needs */
         margin-left: auto; /* Center the box horizontally */
         margin-right: auto; /* Center the box horizontally */
+    }
+
+    .research-box, .projects-box {
+        width: 100%; /* Full width on small screens */
+        margin: 20px 0; /* Adjusted margin */
     }
 
     .left-section, .right-section {
