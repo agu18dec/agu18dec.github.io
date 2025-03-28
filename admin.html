@@ -1,0 +1,305 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin | Agam Bhatia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Add EasyMDE for Markdown editing -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <!-- Add highlight.js for preview -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <style>
+        /* Additional Admin Styles */
+        .admin-container {
+            padding: 2rem 0;
+        }
+        
+        .admin-form {
+            background-color: var(--color-accent-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input[type="text"], 
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-text-light);
+            border-radius: 4px;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+        
+        .editor-wrapper {
+            margin-bottom: 1.5rem;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-link);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        button:hover {
+            background-color: var(--color-link-hover);
+        }
+        
+        button.secondary {
+            background-color: var(--color-text-light);
+        }
+        
+        button.secondary:hover {
+            background-color: var(--color-text);
+        }
+        
+        .preview-container {
+            background-color: var(--color-accent-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-draft {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        
+        .status-published {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        /* EasyMDE customization */
+        .EasyMDEContainer {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Agam Bhatia</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="admin-header">
+            <div class="container">
+                <h1>Blog Admin</h1>
+                <p>Create and manage your blog posts with Markdown</p>
+            </div>
+        </section>
+
+        <section class="admin-container">
+            <div class="container">
+                <div class="admin-form">
+                    <h2>Create New Post</h2>
+                    <form id="blog-form">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" placeholder="Enter post title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select a category</option>
+                                <option value="AI">AI</option>
+                                <option value="Research">Research</option>
+                                <option value="Projects">Projects</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Personal">Personal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="content">Content (Markdown)</label>
+                            <div class="editor-wrapper">
+                                <textarea id="markdown-editor"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="submit" id="save-button">Save Post</button>
+                            <button type="button" id="preview-button" class="secondary">Preview</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="preview-container" id="preview-container" style="display:none;">
+                    <div class="preview-header">
+                        <h2>Preview</h2>
+                        <span class="status status-draft">Draft</span>
+                    </div>
+                    <div class="blog-content" id="preview-content"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Agam Bhatia</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize EasyMDE
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('markdown-editor'),
+                spellChecker: true,
+                autosave: {
+                    enabled: true,
+                    uniqueId: 'blog-post-content',
+                    delay: 1000,
+                },
+                placeholder: 'Write your blog post in Markdown...',
+                toolbar: [
+                    'bold', 'italic', 'heading', '|', 
+                    'quote', 'unordered-list', 'ordered-list', '|',
+                    'link', 'image', '|',
+                    'code', 'table', '|',
+                    'preview', 'side-by-side', 'fullscreen', '|',
+                    'guide'
+                ],
+                renderingConfig: {
+                    singleLineBreaks: false,
+                    codeSyntaxHighlighting: true,
+                }
+            });
+            
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            
+            // Handle preview button click
+            document.getElementById('preview-button').addEventListener('click', function() {
+                const previewContainer = document.getElementById('preview-container');
+                const previewContent = document.getElementById('preview-content');
+                
+                // Get form values
+                const title = document.getElementById('title').value || 'Untitled Post';
+                const content = easyMDE.value();
+                
+                // Set up marked with highlight.js
+                marked.setOptions({
+                    highlight: function(code, lang) {
+                        if (lang && hljs.getLanguage(lang)) {
+                            return hljs.highlight(code, { language: lang }).value;
+                        }
+                        return hljs.highlightAuto(code).value;
+                    },
+                    breaks: true,
+                    gfm: true
+                });
+                
+                // Convert Markdown to HTML and insert into preview
+                previewContent.innerHTML = `
+                    <h1>${title}</h1>
+                    ${marked.parse(content)}
+                `;
+                
+                // Show the preview container
+                previewContainer.style.display = 'block';
+                
+                // Scroll to preview
+                previewContainer.scrollIntoView({ behavior: 'smooth' });
+                
+                // Initialize highlight.js for code blocks
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            });
+            
+            // Handle form submission
+            document.getElementById('blog-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('title').value;
+                const category = document.getElementById('category').value;
+                const date = document.getElementById('date').value;
+                const content = easyMDE.value();
+                
+                // Here you would typically send the data to a server
+                // For this example, we'll just show an alert
+                alert(`Post "${title}" saved successfully!`);
+                
+                // In a real implementation, you would:
+                // 1. Convert the Markdown to HTML
+                // 2. Save the post to a database or file system
+                // 3. Generate a new HTML page for the post
+                // 4. Update the blog index page
+                
+                console.log({
+                    title,
+                    category,
+                    date,
+                    content,
+                    html: marked.parse(content)
+                });
+            });
+        });
+    </script>
+</body>
+</html>
