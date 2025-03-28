@@ -1,370 +1,367 @@
-body, html {
-    height: 85%;
+/* style.css */
+:root {
+    --color-bg: #f8f8f8;
+    --color-text: #1a1a1a;
+    --color-text-light: #6c6c6c;
+    --color-accent: #4a4a4a;
+    --color-accent-light: #e0e0e0;
+    --color-link: #3d5af1;
+    --color-link-hover: #2240dc;
+    --color-code-bg: #272822;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --border-radius: 8px;
+    --container-width: 800px;
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode Option */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #1a1a1a;
+        --color-text: #f8f8f8;
+        --color-text-light: #a0a0a0;
+        --color-accent: #e0e0e0;
+        --color-accent-light: #2a2a2a;
+        --color-link: #818cf8;
+        --color-link-hover: #a5b4fc;
+    }
+}
+
+/* Base Styles */
+* {
     margin: 0;
-    font-family: 'Gatter Sans', sans-serif;
-    font-weight: 300; /* Lighter font weight */
-    background-color: #262424; /* Background color is black */
-    color: white;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-weight: 300;
 }
 
 .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Header */
+header {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-accent-light);
+}
+
+header .container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center; /* Align items to the center of the container */
-    padding: 20px 60px; /* Remove horizontal padding */
-    gap: 0; /* Set gap to 0, we'll control spacing with margin */
-}
-
-.left-section, .right-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: auto; /* Center these sections */
-    justify-content: center; /* Centers the boxes vertically */
-    width: 50%;
-    /*margin-top: 0;
-    margin-left: auto;
-    margin-right: auto; (for later development*/
-}
-
-.description-box {
-    width: calc(50% - 40px); /* Adjust width to account for margin */
-    margin: 20px; /* Add margin to create space around the boxes */
-    height: auto; /* Adjust height to content */
-    text-align: justify;
-}
-
-.left-section {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap; /* Allow boxes to wrap onto the next line */
-    gap: 20px; /* Space between the boxes */
-}
-
-.right-section {
-    flex: 1; /* Takes up 50% of the container */
-}
-
-.description-box, .social-media-box {
-    width: 100%; /* Adjust the width to account for the gap */
-    margin-top: 0; /* Remove the top margin if it's the first element */
-}
-
-.header {
-    width: 100%; /* Full width */
-    text-align: left; /* Align text to the left */
-}
-
-.profile-container {
-    display: flex; /* Arrange items in a row */
-    align-items: flex-start; /* Align items to the top */
-    justify-content: flex-start; /* Align items to the left */
-    margin-bottom: 20px; /* Space below the profile section */
-}
-
-.description-box {
-    background-color: rgba(30, 30, 30, 0.8);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    width: 90%;
-    height: 370px;
-    margin-top: 227px;
-    margin-left: 50px;
-    color: white;
-}
-
-.research-box, .projects-box {
-    background-color: rgba(30, 30, 30, 0.8);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    margin: 20px 0; /* Provides space between the boxes and any other elements */
-    width: 90%; /* Makes the box width relative to its parent section */
-    margin-left: 50px;
-}
-
-
-.research-box h2, .projects-box h2 {
-    white-space: normal;
-    font-weight: 400; /* Lighter font weight, similar to the body text */
-    font-size: 1.75em; /* Increased size for the heading */
-    line-height: 0.5; /* Adjusted line-height for heading */
-    margin-top: 0; /* Remove top margin if present */
-    margin-bottom: 0.5em; /* Keep some space below the heading */
-}
-
-.research-box p, .projects-box p {
-    font-size: 1em; /* Assuming the paragraph in profile is 1em */
-    margin: 0 0 10px 0; /* Spacing between paragraphs */
-    color: white;
-}
-
-.chat-box {
-    font-family: 'Gatter Sans', sans-serif; 
-    background-color: rgba(30, 30, 30, 0.8);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    height: 30px;
-    width: 100%; /* This will match the width of .description-box */
-    height: 108px;
-    margin-top: 20px; /* Space between the two boxes */
-    margin-left: 100px; /* Center the box */
-    margin-right: auto; /* Center the box */
-    color: white;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center text horizontally */
-    align-items: center; /* Center text vertically */
-}
-
-.chat-box:hover {
-    background-color: rgba(50, 50, 50, 0.8); /* Lighter background on hover */
-    cursor: pointer;
-}
-
-
-.chat-box p {
-    font-weight: 400; /* Lighter font weight, similar to the body text */
-    font-size: 1.75em; /* Increased size for the heading */
-    line-height: 1.0; /* Adjusted line-height for heading */
-    margin-top: 1; /* Remove top margin if present */
-    margin-bottom: 0.5em; /* Keep some space below the heading */
-    text-align: center; /* Center the text within the chat-box */
-}
-
-
-.social-media-box {
-    /* General style for LinkedIn, GitHub, and Twitter boxes */
-    background-color: rgba(30, 30, 30, 0.8);
-    padding: 25px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.logo:hover {
+    color: var(--color-text);
+    opacity: 0.8;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav li {
+    margin-left: 1.5rem;
+}
+
+nav a {
+    color: var(--color-text-light);
+    font-weight: 400;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover, nav a.active {
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+/* Hero Section */
+.hero {
+    padding: 5rem 0 2rem;
     text-align: center;
-    margin-bottom: 10px; /* This sets the space between the LinkedIn box and the container of GitHub and Twitter boxes */
-    width: 75%; /* Increase the width to 100% of its parent container */
-    height: 150px; /* Increase the height */
 }
 
-.social-media-icon {
-    margin: 0 auto; /* Centers the icon horizontally */
-    display: block; /* Change display to block for centering */
-    width: 60px; /* Set the width of the icon */
-    height: 60px; /* Set the height of the icon */
-}
-
-.gmail-icon {
-    margin: 0 auto; /* Centers the icon horizontally */
-    display: block; /* Change display to block for centering */
-    width: 70px; /* Set the width of the icon */
-    height: 55px; /* Set the height of the icon */
-}
-
-.social-media-handle {
-    font-size: 1.25em; /* Increased font size for visibility */
-    text-align: left; /* Align text to the left */
-    margin-top: auto; /* Push to the bottom */
-    padding-left: 60px; /* Give space for the icon */
-}
-
-.social-media-link {
-    color: grey; /* White text color */
-    text-decoration: none; /* No underline */
-    font-weight: 300; /* Light font weight for consistency */
-}
-
-.social-media-box:hover {
-    background-color: rgba(50, 50, 50, 0.8); /* Lighter background on hover */
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-}
-
-.right-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center-align the child elements horizontally */
-    width: 47%; /* Set the width to match the LinkedIn box */
-    margin-top: 225px; /* Adjust the margin to position it closer to the profile box if needed */
-}
-
-
-.header-container {
-    display: flex;
-    align-items: center; /* Align the image and heading in one line */
-    margin-bottom: 20px; /* Space between the header and paragraph */
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-right: 20px;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--color-accent-light);
 }
-/* Container for GitHub and Twitter boxes */
-.social-media-container {
-    /* Container holding both GitHub and Twitter boxes */
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* About Section */
+.about {
+    padding: 3rem 0;
+}
+
+.about-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Connect Section */
+.connect {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.connect h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
     display: flex;
-    justify-content: space-around; /* Evenly space the inner boxes */
-    gap: 20px; /* Space between GitHub and Twitter boxes */
-    margin-top: 0px; /* Pull the container up to reduce space between it and the LinkedIn box */
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
-
-/* GitHub and Twitter box styling */
-.social-media-container .social-media-box {
-    /* Specific style for GitHub and Twitter boxes */
-    width: 220px; /* Increase the width to take up half of the parent container minus the gap */
-    height: 150px; /* Increase the height */
-    margin-top: 5px; /* Adjust top margin to move closer to the LinkedIn box */
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-accent-light);
+    transition: var(--transition);
 }
 
-/* Add additional styles for the text and spacing */
-h1 {
-    white-space: normal;
-    font-weight: 400; /* Lighter font weight, similar to the body text */
-    font-size: 1.75em; /* Increased size for the heading */
-    line-height: 0.5; /* Adjusted line-height for heading */
-    margin-top: 0; /* Remove top margin if present */
-    margin-bottom: 0.5em; /* Keep some space below the heading */
+.social-link:hover {
+    transform: translateY(-3px);
+    background-color: var(--color-accent);
 }
 
-p {
-    font-size: 1.25em; /* Increased font size for the paragraph */
-    margin-top: 0; /* Remove top margin for paragraph if necessary */
-    margin-bottom: 1.50em; /* Add some space below each paragraph */
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text);
 }
 
-.stanford-link {
-    color: #847a7a; /* This is Stanford's maroon red color */
-    text-decoration: none; /* Removes the underline from links */
+/* Footer */
+footer {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--color-text-light);
+    border-top: 1px solid var(--color-accent-light);
+    font-size: 0.9rem;
 }
 
-.stanford-link:hover {
-    color: #8C1515; /* This is Stanford's maroon red color */
+/* Blog List */
+.blog-header {
+    padding: 5rem 0 3rem;
+    text-align: center;
 }
 
-.SEP-link {
-    color: #847a7a; /* This is Stanford's maroon red color */
-    text-decoration: none; /* Removes the underline from links */
+.blog-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
-.SEP-link:hover {
-    color: #1eab4b; /* This is Stanford's maroon red color */
+.blog-list {
+    padding: 2rem 0 5rem;
 }
 
-.conrad-link {
-    color: #847a7a; /* This is Stanford's maroon red color */
-    text-decoration: none; /* Removes the underline from links */
+.blog-preview {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--color-accent-light);
+    padding-bottom: 2rem;
 }
 
-.conrad-link:hover {
-    color: #1d3dba; /* This is Stanford's maroon red color */
+.blog-preview:last-child {
+    border-bottom: none;
 }
 
-
-a {
-    color: #0d6efd; /* Example link color, choose what fits your design */
-    text-decoration: none; /* No underline */
-    font-weight: 300; /* Consistent with the theme of light font weights */
+.blog-preview a {
+    color: var(--color-text);
+    display: block;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+.blog-preview a:hover h2 {
+    color: var(--color-link);
+}
+
+.blog-meta {
+    display: flex;
+    gap: 1rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-preview h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.blog-preview p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    color: var(--color-link);
+    font-weight: 400;
+}
+
+/* Blog Post */
+.blog-post {
+    padding: 5rem 0;
+}
+
+.blog-post h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin: 1rem 0 2rem;
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.blog-content h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+}
+
+.blog-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content ul, .blog-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-content a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.blog-content img {
+    display: block;
+    margin: 2rem auto;
+    max-width: 100%;
+    border-radius: var(--border-radius);
+}
+
+.blog-content blockquote {
+    border-left: 4px solid var(--color-accent);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--color-text-light);
+}
+
+.blog-content pre {
+    background-color: var(--color-code-bg);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.blog-content code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.blog-content hr {
+    border: none;
+    border-top: 1px solid var(--color-accent-light);
+    margin: 2rem 0;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack the children vertically */
+        padding: 0 1rem;
     }
-
-    .description-box {
-        box-sizing: border-box; /* Makes sure padding is included in the width */
-        padding: 20px; /* Add padding to ensure text doesn't touch the edges */
-        margin-top: 60px; /* Reduced top margin */
-        margin-bottom: auto; /* Add bottom margin */
-        height: auto; /* Allow the box to grow as tall as it needs */
-        margin-left: auto; /* Center the box horizontally */
-        margin-right: auto; /* Center the box horizontally */
+    
+    .hero h1 {
+        font-size: 2rem;
     }
-
-    .research-box, .projects-box {
-        width: 100%; /* Full width on small screens */
-        margin: 20px 0; /* Adjusted margin */
+    
+    .blog-post h1 {
+        font-size: 2rem;
     }
-
-    .left-section, .right-section {
-        width: 100%; /* Full width for both sections */
-        align-items: center; /* Center align items in both sections */
-    }
-
-    .right-section {
-        display: flex; /* Make sure it's displayed as a flex container */
-        flex-direction: column; /* Stack the social media icons vertically */
-        align-items: center; /* Center the icons */
-    }
-
-    .social-media-container {
-        justify-content: center; /* Center the social media containers */
-    }
-
-    .social-media-box {
-        width: auto; /* Allow the boxes to fit content */
-        margin: 10px; /* Add some space around the boxes */
-    }
-}
-
-
-@media only screen and (max-width: 768px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Centers content vertically */
-        align-items: center; /* Centers content horizontally */
-        padding: 20px;
-    }
-
-
-    .left-section, .right-section {
-        width: 100%;
-        align-items: center;
-    }
-
-    h1 {
-        font-size: 1.5em; /* You might want to reduce the font size on small screens */
-    }
-
-    .description-box {
-        width: 100%; /* Full width of the screen */
-        box-sizing: border-box; /* Makes sure padding is included in the width */
-        padding: 20px; /* Add padding to ensure text doesn't touch the edges */
-        margin-top: 60px; /* Reduced top margin */
-        margin-bottom: auto; /* Add bottom margin */
-        height: auto; /* Allow the box to grow as tall as it needs */
-        margin-left: auto; /* Center the box horizontally */
-        margin-right: auto; /* Center the box horizontally */
-    }
-
-    .right-section {
-        display: flex; /* Changed to flex to show the boxes */
-        flex-direction: row;
-        overflow-x: auto; /* Allows for horizontal scrolling */
-        -webkit-overflow-scrolling: touch; /* Enables momentum-based scrolling for Webkit browsers */
-        width: 100%; /* Set the width to the viewport width */
-        justify-content: flex-start; /* Aligns children to the start, allowing for scrolling to the right */
-        margin-top: 20px; /* Add some space after the description box */
-        padding-bottom: 20px; /* Add padding to allow scrolling within the section */
-    }
-
-    .social-media-container {
-        width: 200%; /* Increase width to allow side-by-side layout */
-
-        display: flex;
-        justify-content: flex-start;
-        padding-right: 20px; /* Add padding to the right to ensure the last box isn't cut off */
-    }
-
-    .social-media-box {
-        width: 50%; /* Set a base width for each social media box */
-        margin: 0 10px; /* Add some space between boxes */
+    
+    .profile-pic {
+        width: 100px;
+        height: 100px;
     }
 }
