@@ -1,0 +1,508 @@
+// _sass/_layout.scss
+@import "variables";
+
+// Site header
+.site-header {
+  padding: $spacing-4 0;
+  border-bottom: 1px solid $color-border;
+  
+  @media (prefers-color-scheme: dark) {
+    border-bottom-color: $dark-color-border;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.site-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  
+  &:hover {
+    color: $color-accent;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    color: $dark-color-text;
+    
+    &:hover {
+      color: $dark-color-accent;
+    }
+  }
+}
+
+// Site navigation
+.site-nav {
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: $spacing-4;
+    
+    a {
+      color: $color-text-light;
+      font-weight: $font-weight-normal;
+      padding-bottom: $spacing-1;
+      border-bottom: 2px solid transparent;
+      
+      &:hover, &.active {
+        color: $color-text;
+        border-bottom-color: $color-accent;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        color: $dark-color-text-light;
+        
+        &:hover, &.active {
+          color: $dark-color-text;
+          border-bottom-color: $dark-color-accent;
+        }
+      }
+    }
+  }
+  
+  // Mobile navigation toggle
+  .nav-toggle {
+    display: none;
+  }
+  
+  .nav-toggle-label {
+    display: none;
+    cursor: pointer;
+    
+    span, span::before, span::after {
+      display: block;
+      background: $color-text;
+      height: 2px;
+      width: 1.5rem;
+      position: relative;
+      
+      @media (prefers-color-scheme: dark) {
+        background: $dark-color-text;
+      }
+    }
+    
+    span::before, span::after {
+      content: '';
+      position: absolute;
+    }
+    
+    span::before {
+      top: -8px;
+    }
+    
+    span::after {
+      bottom: -8px;
+    }
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    .nav-toggle-label {
+      display: block;
+    }
+    
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: $color-bg;
+      flex-direction: column;
+      align-items: center;
+      padding: $spacing-4;
+      gap: $spacing-5;
+      transform: scale(1, 0);
+      transform-origin: top;
+      transition: transform 0.3s ease-out;
+      z-index: 999;
+      border-bottom: 1px solid $color-border;
+      
+      @media (prefers-color-scheme: dark) {
+        background-color: $dark-color-bg;
+        border-bottom-color: $dark-color-border;
+      }
+      
+      a {
+        opacity: 0;
+        transition: opacity 0.2s ease-out 0.15s;
+      }
+    }
+    
+    .nav-toggle:checked ~ .nav-links {
+      transform: scale(1, 1);
+      
+      a {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Main content area
+.content {
+  min-height: calc(100vh - 120px - 160px); // Viewport height minus header and footer
+  padding: $spacing-6 0;
+}
+
+// Site footer
+.site-footer {
+  padding: $spacing-6 0;
+  border-top: 1px solid $color-border;
+  color: $color-text-light;
+  font-size: $font-size-sm;
+  
+  @media (prefers-color-scheme: dark) {
+    border-top-color: $dark-color-border;
+    color: $dark-color-text-light;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      gap: $spacing-4;
+      text-align: center;
+    }
+  }
+}
+
+// Social links
+.social-links {
+  display: flex;
+  gap: $spacing-4;
+  
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+    background-color: $color-accent-light;
+    color: $color-text;
+    transition: $transition-base;
+    
+    &:hover {
+      transform: translateY(-2px);
+      background-color: $color-accent;
+      color: white;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      background-color: $dark-color-accent-light;
+      color: $dark-color-text;
+      
+      &:hover {
+        background-color: $dark-color-accent;
+        color: $dark-color-bg;
+      }
+    }
+  }
+  
+  // Footer social links are slightly smaller
+  .site-footer & {
+    a {
+      width: 32px;
+      height: 32px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+// Hero section
+.hero {
+  padding: $spacing-10 0 $spacing-8;
+  text-align: center;
+  
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: $border-radius-full;
+    object-fit: cover;
+    margin: 0 auto $spacing-5;
+    border: 3px solid $color-accent-light;
+    
+    @media (prefers-color-scheme: dark) {
+      border-color: $dark-color-accent-light;
+    }
+  }
+  
+  h1 {
+    margin-bottom: $spacing-2;
+  }
+  
+  .tagline {
+    color: $color-text-light;
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-6;
+    
+    @media (prefers-color-scheme: dark) {
+      color: $dark-color-text-light;
+    }
+  }
+}
+
+// About section
+.about {
+  padding: $spacing-6 0;
+  
+  .about-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// Connect section
+.connect {
+  padding: $spacing-6 0;
+  text-align: center;
+  
+  h2 {
+    margin-bottom: $spacing-5;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+}
+
+// Recent posts section
+.recent-posts {
+  padding: $spacing-10 0;
+  background-color: $color-accent-light;
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-color-accent-light;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: $spacing-6;
+  }
+  
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-5;
+    
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .view-all {
+    text-align: center;
+    margin-top: $spacing-8;
+  }
+}
+
+// Blog page
+.blog-header {
+  padding: $spacing-10 0 $spacing-6;
+  text-align: center;
+  
+  h1 {
+    margin-bottom: $spacing-3;
+  }
+  
+  p {
+    color: $color-text-light;
+    font-size: $font-size-lg;
+    max-width: 600px;
+    margin: 0 auto;
+    
+    @media (prefers-color-scheme: dark) {
+      color: $dark-color-text-light;
+    }
+  }
+}
+
+.blog-list {
+  padding: $spacing-4 0 $spacing-10;
+  
+  .post-item {
+    margin-bottom: $spacing-8;
+    padding-bottom: $spacing-6;
+    border-bottom: 1px solid $color-border;
+    
+    @media (prefers-color-scheme: dark) {
+      border-bottom-color: $dark-color-border;
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .post-meta {
+    display: flex;
+    gap: $spacing-3;
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-2;
+    
+    @media (prefers-color-scheme: dark) {
+      color: $dark-color-text-light;
+    }
+  }
+  
+  .post-title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-3;
+    
+    a {
+      color: $color-text;
+      transition: $transition-base;
+      
+      &:hover {
+        color: $color-accent;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        color: $dark-color-text;
+        
+        &:hover {
+          color: $dark-color-accent;
+        }
+      }
+    }
+  }
+  
+  .post-excerpt {
+    margin-bottom: $spacing-3;
+  }
+  
+  .read-more {
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Post card for featured/recent posts
+.post-card {
+  background-color: white;
+  border-radius: $border-radius;
+  padding: $spacing-5;
+  box-shadow: $shadow;
+  transition: $transition-base;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+  }
+  
+  .post-date {
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-2;
+    display: block;
+  }
+  
+  h3 {
+    margin-top: $spacing-1;
+    margin-bottom: $spacing-3;
+    font-size: $font-size-lg;
+    
+    a {
+      color: $color-text;
+      
+      &:hover {
+        color: $color-accent;
+      }
+    }
+  }
+  
+  p {
+    margin-bottom: $spacing-3;
+    flex-grow: 1;
+  }
+  
+  .read-more {
+    align-self: flex-start;
+    font-weight: $font-weight-medium;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: lighten($dark-color-bg, 5%);
+    
+    h3 a {
+      color: $dark-color-text;
+      
+      &:hover {
+        color: $dark-color-accent;
+      }
+    }
+    
+    .post-date {
+      color: $dark-color-text-light;
+    }
+  }
+}
+
+// Individual post page
+.post {
+  padding: $spacing-8 0;
+  
+  .post-header {
+    margin-bottom: $spacing-6;
+  }
+  
+  .post-meta {
+    display: flex;
+    gap: $spacing-3;
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-3;
+    
+    .post-categories {
+      display: flex;
+      gap: $spacing-2;
+    }
+    
+    .post-category {
+      padding: $spacing-1 $spacing-2;
+      background-color: $color-accent-light;
+      border-radius: $border-radius-full;
+      
+      @media (prefers-color-scheme: dark) {
+        background-color: $dark-color-accent-light;
+      }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      color: $dark-color-text-light;
+    }
+  }
+  
+  .post-title {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-5;
+  }
+  
+  .post-content {
+    margin-bottom: $spacing-8;
+    
+    img {
+      margin: $spacing-6 auto;
+      border-radius: $border-radius;
+    }
+    
+    a {
+      text
