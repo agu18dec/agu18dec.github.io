@@ -1,0 +1,284 @@
+// _sass/_base.scss
+@import "variables";
+
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Base styles
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: $transition-base;
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  body {
+    color: $dark-color-text;
+    background-color: $dark-color-bg;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-4;
+  font-weight: $font-weight-medium;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+}
+
+h2 {
+  font-size: $font-size-2xl;
+  margin-top: $spacing-8;
+}
+
+h3 {
+  font-size: $font-size-xl;
+  margin-top: $spacing-6;
+}
+
+h4 {
+  font-size: $font-size-lg;
+  margin-top: $spacing-5;
+}
+
+p {
+  margin-bottom: $spacing-4;
+}
+
+a {
+  color: $color-accent;
+  text-decoration: none;
+  transition: $transition-base;
+  
+  &:hover {
+    color: darken($color-accent, 10%);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    color: $dark-color-accent;
+    
+    &:hover {
+      color: lighten($dark-color-accent, 10%);
+    }
+  }
+}
+
+ul, ol {
+  margin-bottom: $spacing-4;
+  margin-left: $spacing-5;
+}
+
+li {
+  margin-bottom: $spacing-2;
+}
+
+blockquote {
+  border-left: 4px solid $color-accent;
+  padding-left: $spacing-4;
+  color: $color-text-light;
+  margin: $spacing-5 0;
+  
+  @media (prefers-color-scheme: dark) {
+    border-left-color: $dark-color-accent;
+    color: $dark-color-text-light;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $color-border;
+  margin: $spacing-8 0;
+  
+  @media (prefers-color-scheme: dark) {
+    border-top-color: $dark-color-border;
+  }
+}
+
+// Selection
+::selection {
+  background-color: $color-selection;
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-color-selection;
+  }
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 $spacing-4;
+  
+  &.wide {
+    max-width: $container-width-wide;
+  }
+}
+
+// Buttons
+.button {
+  display: inline-block;
+  background-color: $color-accent;
+  color: white;
+  font-weight: $font-weight-medium;
+  padding: $spacing-2 $spacing-4;
+  border-radius: $border-radius;
+  transition: $transition-base;
+  cursor: pointer;
+  border: none;
+  
+  &:hover, &:focus {
+    background-color: darken($color-accent, 5%);
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    background-color: darken($color-accent, 10%);
+    transform: translateY(0);
+  }
+  
+  &.secondary {
+    background-color: transparent;
+    color: $color-accent;
+    border: 1px solid $color-accent;
+    
+    &:hover, &:focus {
+      background-color: rgba($color-accent, 0.1);
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      background-color: rgba($color-accent, 0.2);
+      transform: translateY(0);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      color: $dark-color-accent;
+      border-color: $dark-color-accent;
+      
+      &:hover, &:focus {
+        background-color: rgba($dark-color-accent, 0.1);
+      }
+      
+      &:active {
+        background-color: rgba($dark-color-accent, 0.2);
+      }
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-color-accent;
+    
+    &:hover, &:focus {
+      background-color: lighten($dark-color-accent, 5%);
+    }
+    
+    &:active {
+      background-color: lighten($dark-color-accent, 10%);
+    }
+  }
+}
+
+// Code blocks
+pre {
+  background-color: $color-code-bg;
+  border-radius: $border-radius;
+  padding: $spacing-4;
+  overflow-x: auto;
+  margin: $spacing-5 0;
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-color-code-bg;
+  }
+}
+
+code {
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  background-color: $color-code-bg;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-color-code-bg;
+  }
+  
+  pre & {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Fade-in animation
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive utilities
+@mixin break-sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin break-md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin break-lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin break-xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
