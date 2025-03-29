@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} | Agam Bhatia</title>
+    <meta name="description" content="{{excerpt}}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+Pro:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    
+    <!-- Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/img/favicon.ico">
+</head>
+<body>
+    <div class="paper">
+        <header>
+            <nav class="container">
+                <a href="../../index.html" class="logo">Agam Bhatia</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../index.html" class="active">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article class="blog-post container">
+                <header class="blog-post-header">
+                    <h1>{{title}}</h1>
+                    <div class="meta">
+                        <div class="date">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>{{date}}</span>
+                        </div>
+                        <div class="tags">
+                            {{#each tags}}
+                            <span class="tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </header>
+
+                <div class="blog-content" id="content">
+                    <!-- Content will be loaded from Markdown file -->
+                    <div class="loading">Loading content...</div>
+                </div>
+
+                <div class="post-navigation">
+                    {{#if prevPost}}
+                    <a href="{{prevPost.slug}}.html" class="post-nav-prev">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        {{prevPost.title}}
+                    </a>
+                    {{/if}}
+                    
+                    {{#if nextPost}}
+                    <a href="{{nextPost.slug}}.html" class="post-nav-next">
+                        {{nextPost.title}}
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    {{/if}}
+                </div>
+            </article>
+        </main>
+
+        <footer class="container">
+            <p>&copy; 2025 Agam Bhatia</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight.js initialization
+            hljs.highlightAll();
+            
+            // Load the Markdown content
+            fetch('../../blog/posts/markdown/{{slug}}.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load content');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Configure marked options
+                    marked.setOptions({
+                        highlight: function(code, lang) {
+                            if (lang && hljs.getLanguage(lang)) {
+                                return hljs.highlight(code, { language: lang }).value;
+                            }
+                            return hljs.highlightAuto(code).value;
+                        },
+                        breaks: true,
+                        gfm: true,
+                        headerIds: true,
+                        mangle: false
+                    });
+                    
+                    // Convert Markdown to HTML
+                    const content = document.getElementById('content');
+                    content.innerHTML = marked.parse(markdown);
+                    
+                    // Highlight code blocks
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightBlock(block);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading markdown content:', error);
+                    document.getElementById('content').innerHTML = '<p>Error loading content. Please try again later.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
