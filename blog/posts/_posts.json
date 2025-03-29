@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Building LLMs: From Theory to Practice",
+    "slug": "building-llms-from-theory-to-practice",
+    "date": "2025-03-27",
+    "tags": ["AI", "Research"],
+    "excerpt": "An exploration of how to implement and fine-tune large language models for specific domains, with practical examples and code."
+  },
+  {
+    "title": "Earthquake Detection Using Computer Vision",
+    "slug": "earthquake-detection-using-computer-vision",
+    "date": "2025-03-15",
+    "tags": ["Research", "Projects"],
+    "excerpt": "How we're using advanced vision models to detect early signs of seismic activity and improve prediction systems."
+  },
+  {
+    "title": "Building My First Neural Network",
+    "slug": "building-my-first-neural-network",
+    "date": "2025-02-28",
+    "tags": ["AI", "Projects"],
+    "excerpt": "A beginner's journey into the world of neural networks, with lessons learned and tips for newcomers."
+  }
+]
