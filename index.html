@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/main.css">
@@ -25,6 +25,24 @@
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="blog/index.html">Notes</a></li>
+                    <li>
+                        <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 1V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 21V23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.22 4.22L5.64 5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.36 18.36L19.78 19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12H23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.22 19.78L5.64 18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </header>
@@ -32,20 +50,15 @@
         <main>
             <section class="intro container">
                 <div class="intro-content">
-                    <div class="profile-container">
-                        <img src="assets/img/profile.jpg" alt="Agam Bhatia" class="profile-image">
-                    </div>
-                    <div class="intro-text">
-                        <h1>Hey, I'm Agam!</h1>
-                        <p class="subtitle">CS & Math @ Stanford • AI Enthusiast • Builder</p>
+                    <h1>Hey, I'm Agam!</h1>
+                    <p class="subtitle">CS & Math @ Stanford • AI Enthusiast • Builder</p>
+                    
+                    <div class="bio">
+                        <p>I'm an undergraduate at <a href="https://profiles.stanford.edu/agam-bhatia">Stanford</a> majoring in CS and Math. I build things people want and am curious about AI.</p>
                         
-                        <div class="bio">
-                            <p>I'm an undergraduate at <a href="https://profiles.stanford.edu/agam-bhatia">Stanford</a> majoring in CS and Math. I build things people want and am curious about AI.</p>
-                            
-                            <p>Currently, I'm building AI products at <a href="https://eladgil.com">Elad Gil's fund</a> (update coming soon!) and working as a NLP researcher at the Stanford NLP Group and as a robotics researcher at the Khatib Lab @ Stanford Robotics.</p>
-                            
-                            <p>Previously, I've developed vision models for enhanced earthquake detection as part of the <a href="https://sep.sites.stanford.edu">SEP</a> group, and sharpened my skills across the stack at the <a href="https://www.conradchallenge.org">Conrad Challenge</a>.</p>
-                        </div>
+                        <p>Currently, I'm building AI products at <a href="https://eladgil.com">Elad Gil's fund</a> (update coming soon!) and working as a NLP researcher at the Stanford NLP Group and as a robotics researcher at the Khatib Lab @ Stanford Robotics.</p>
+                        
+                        <p>Previously, I've developed vision models for enhanced earthquake detection as part of the <a href="https://sep.sites.stanford.edu">SEP</a> group, and sharpened my skills across the stack at the <a href="https://www.conradchallenge.org">Conrad Challenge</a>.</p>
                     </div>
                 </div>
             </section>

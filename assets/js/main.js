@@ -1,9 +1,39 @@
 /**
  * Paper & Pen - Main JavaScript
- * Handles general site functionality and homepage features
+ * Handles general site functionality, dark mode toggle, and homepage features
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Check for dark mode preference
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Apply dark mode if preferred or saved
+    if (savedTheme === 'dark' || (prefersDarkMode && savedTheme !== 'light')) {
+        document.body.classList.add('dark-mode');
+        toggleDarkModeIcons(true);
+    }
+    
+    // Setup dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            toggleDarkModeIcons(isDarkMode);
+        });
+    }
+    
+    function toggleDarkModeIcons(isDarkMode) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        
+        if (sunIcon && moonIcon) {
+            sunIcon.style.display = isDarkMode ? 'none' : 'block';
+            moonIcon.style.display = isDarkMode ? 'block' : 'none';
+        }
+    }
+    
     // Smooth fade-in animation for main content
     setTimeout(() => {
         document.querySelector('main').style.opacity = 1;
@@ -81,7 +111,6 @@ function fetchRecentPosts() {
                         <h3>${post.title}</h3>
                         <div class="note-meta">
                             <span>${formatDate(post.date)}</span>
-                            <span>${post.tags[0] || 'General'}</span>
                         </div>
                         <p class="note-excerpt">${post.excerpt}</p>
                         <span class="read-more">Read more →</span>

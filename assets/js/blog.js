@@ -1,39 +1,46 @@
 /**
  * Paper & Pen - Blog JavaScript
- * Handles blog listing, filtering, pagination, and Markdown rendering
+ * Handles blog listing, pagination, and dark mode
  */
 
 // Global variables
 let allPosts = [];
-let filteredPosts = [];
+const postsPerPage = 8; // Increased to show more posts per page
 let currentPage = 1;
-const postsPerPage = 5;
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Check for dark mode preference
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Apply dark mode if preferred or saved
+    if (savedTheme === 'dark' || (prefersDarkMode && savedTheme !== 'light')) {
+        document.body.classList.add('dark-mode');
+        toggleDarkModeIcons(true);
+    }
+    
+    // Setup dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            toggleDarkModeIcons(isDarkMode);
+        });
+    }
+    
+    function toggleDarkModeIcons(isDarkMode) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        
+        if (sunIcon && moonIcon) {
+            sunIcon.style.display = isDarkMode ? 'none' : 'block';
+            moonIcon.style.display = isDarkMode ? 'block' : 'none';
+        }
+    }
+    
     // Load all posts
     loadPosts();
-    
-    // Set up event listeners for filtering
-    const categoryFilter = document.getElementById('category-filter');
-    if (categoryFilter) {
-        categoryFilter.addEventListener('change', filterPosts);
-    }
-    
-    // Set up event listeners for search
-    const searchInput = document.getElementById('search-input');
-    const searchButton = document.getElementById('search-button');
-    
-    if (searchInput && searchButton) {
-        searchButton.addEventListener('click', () => {
-            filterPosts();
-        });
-        
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                filterPosts();
-            }
-        });
-    }
 });
 
 /**
@@ -54,54 +61,24 @@ function loadPosts() {
         .then(posts => {
             // Sort by date (newest first)
             allPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            filteredPosts = [...allPosts];
             
-            if (filteredPosts.length === 0) {
+            if (allPosts.length === 0) {
                 blogItemsContainer.innerHTML = '<p>No posts yet. Check back soon!</p>';
                 return;
             }
             
             // Render first page
             renderPosts();
-            renderPagination();
+            
+            // Only add pagination if we have more than one page
+            if (allPosts.length > postsPerPage) {
+                renderPagination();
+            }
         })
         .catch(error => {
             console.error('Error loading posts:', error);
             blogItemsContainer.innerHTML = '<p>Error loading posts. Please try again later.</p>';
         });
-}
-
-/**
- * Filters posts based on category and search term
- */
-function filterPosts() {
-    const categoryFilter = document.getElementById('category-filter');
-    const searchInput = document.getElementById('search-input');
-    
-    const category = categoryFilter ? categoryFilter.value : 'all';
-    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    
-    // Reset to page 1 when filtering
-    currentPage = 1;
-    
-    // Apply filters
-    filteredPosts = allPosts.filter(post => {
-        // Category filter
-        const categoryMatch = category === 'all' || 
-                             post.tags.some(tag => tag.toLowerCase() === category.toLowerCase());
-        
-        // Search filter
-        const searchMatch = !searchTerm || 
-                           post.title.toLowerCase().includes(searchTerm) || 
-                           post.excerpt.toLowerCase().includes(searchTerm) ||
-                           post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-        
-        return categoryMatch && searchMatch;
-    });
-    
-    // Render filtered posts
-    renderPosts();
-    renderPagination();
 }
 
 /**
@@ -115,10 +92,10 @@ function renderPosts() {
     // Calculate pagination
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
-    const currentPosts = filteredPosts.slice(startIndex, endIndex);
+    const currentPosts = allPosts.slice(startIndex, endIndex);
     
     if (currentPosts.length === 0) {
-        blogItemsContainer.innerHTML = '<p>No posts found matching your criteria.</p>';
+        blogItemsContainer.innerHTML = '<p>No posts found.</p>';
         return;
     }
     
@@ -133,7 +110,6 @@ function renderPosts() {
                         </svg>
                         ${formatDate(post.date)}
                     </div>
-                    ${post.tags.length > 0 ? `<span class="tag">${post.tags[0]}</span>` : ''}
                 </div>
                 <h2>${post.title}</h2>
                 <p class="excerpt">${post.excerpt}</p>
@@ -158,7 +134,7 @@ function renderPagination() {
     
     if (!paginationContainer) return;
     
-    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+    const totalPages = Math.ceil(allPosts.length / postsPerPage);
     
     if (totalPages <= 1) {
         paginationContainer.innerHTML = '';
