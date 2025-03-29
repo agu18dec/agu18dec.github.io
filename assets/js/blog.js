@@ -5,7 +5,7 @@
 
 // Global variables
 let allPosts = [];
-const postsPerPage = 8; // Increased to show more posts per page
+const postsPerPage = 8;
 let currentPage = 1;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -51,7 +51,10 @@ function loadPosts() {
     
     if (!blogItemsContainer) return;
     
-    fetch('/blog/posts/_posts.json')
+    // Get base URL for GitHub Pages compatibility
+    const baseUrl = getBaseUrl();
+    
+    fetch(`${baseUrl}posts/_posts.json`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load posts');
@@ -89,6 +92,9 @@ function renderPosts() {
     
     if (!blogItemsContainer) return;
     
+    // Get base URL for GitHub Pages compatibility
+    const baseUrl = getBaseUrl();
+    
     // Calculate pagination
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
@@ -102,7 +108,7 @@ function renderPosts() {
     // Build HTML for posts
     const postsHTML = currentPosts.map(post => {
         return `
-            <a href="/blog/posts/${post.slug}.html" class="blog-item">
+            <a href="${baseUrl}posts/${post.slug}.html" class="blog-item">
                 <div class="meta">
                     <div class="date">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,6 +204,29 @@ function renderPagination() {
             });
         });
     });
+}
+
+/**
+ * Gets the base URL for the site, accounting for GitHub Pages project sites
+ * @return {string} The base URL with trailing slash
+ */
+function getBaseUrl() {
+    // For GitHub Pages project sites, this will correctly determine the base URL
+    const baseTag = document.querySelector('base');
+    if (baseTag && baseTag.href) {
+        return baseTag.href;
+    }
+    
+    // Extract from current URL for GitHub Pages project sites
+    const pathSegments = window.location.pathname.split('/');
+    if (pathSegments.length > 2 && pathSegments[1] !== '') {
+        // We're in blog/index.html, so we need to go up one level
+        const repoName = pathSegments[1];
+        return `/${repoName}/`;
+    }
+    
+    // Default for root sites (including GitHub Pages user sites)
+    return '/';
 }
 
 /**

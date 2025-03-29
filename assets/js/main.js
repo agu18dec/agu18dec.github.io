@@ -85,8 +85,11 @@ function fetchRecentPosts() {
     
     if (!recentNotesContainer) return;
     
+    // Get base URL for GitHub Pages compatibility
+    const baseUrl = getBaseUrl();
+    
     // Fetch the posts metadata
-    fetch('/blog/posts/_posts.json')
+    fetch(`${baseUrl}blog/posts/_posts.json`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load posts');
@@ -107,7 +110,7 @@ function fetchRecentPosts() {
             // Create HTML for each post
             const postsHTML = recentPosts.map(post => {
                 return `
-                    <a href="/blog/posts/${post.slug}.html" class="note-card">
+                    <a href="${baseUrl}blog/posts/${post.slug}.html" class="note-card">
                         <h3>${post.title}</h3>
                         <div class="note-meta">
                             <span>${formatDate(post.date)}</span>
@@ -124,6 +127,28 @@ function fetchRecentPosts() {
             console.error('Error loading recent posts:', error);
             recentNotesContainer.innerHTML = '<p>Error loading recent notes. Please try again later.</p>';
         });
+}
+
+/**
+ * Gets the base URL for the site, accounting for GitHub Pages project sites
+ * @return {string} The base URL with trailing slash
+ */
+function getBaseUrl() {
+    // For GitHub Pages project sites, this will correctly determine the base URL
+    const baseTag = document.querySelector('base');
+    if (baseTag && baseTag.href) {
+        return baseTag.href;
+    }
+    
+    // Extract from current URL for GitHub Pages project sites
+    const pathSegments = window.location.pathname.split('/');
+    if (pathSegments.length > 1 && pathSegments[1] !== '') {
+        // This is a GitHub Pages project site (username.github.io/repository/)
+        return '/' + pathSegments[1] + '/';
+    }
+    
+    // Default for root sites (including GitHub Pages user sites)
+    return '/';
 }
 
 /**

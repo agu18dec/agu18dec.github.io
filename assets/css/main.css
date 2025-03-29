@@ -1,6 +1,6 @@
 /* 
  * Paper & Pen - Refined Main Stylesheet
- * Dark mode professional design with stronger typography
+ * Dark mode professional design with stronger typography and wider content
  */
 
  :root {
@@ -34,7 +34,7 @@
   
   /* Other */
   --border-radius: 3px;
-  --container-width: 42rem;
+  --container-width: 56rem; /* Increased from 42rem */
   --transition: all 0.2s ease;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -217,7 +217,7 @@ main {
 
 .intro-content {
   margin: 0 auto;
-  max-width: 36rem;
+  max-width: 48rem; /* Increased from 36rem */
 }
 
 .intro h1 {
