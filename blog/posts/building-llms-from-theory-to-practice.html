@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building LLMs: From Theory to Practice | Agam Bhatia</title>
+    <meta name="description" content="An exploration of how to implement and fine-tune large language models for specific domains, with practical examples and code.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    
+    <!-- Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/img/favicon.ico">
+</head>
+<body>
+    <div class="paper">
+        <header>
+            <nav class="container">
+                <a href="../../index.html" class="logo">Agam Bhatia</a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../index.html" class="active">Notes</a></li>
+                    <li>
+                        <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 1V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 21V23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.22 4.22L5.64 5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.36 18.36L19.78 19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12H23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.22 19.78L5.64 18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article class="blog-post container">
+                <header class="blog-post-header">
+                    <h1>Building LLMs: From Theory to Practice</h1>
+                    <div class="meta">
+                        <div class="date">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>March 26, 2025</span>
+                        </div>
+                        <div class="tags">
+                            
+                            <span class="tag">AI</span>
+                            
+                            <span class="tag">Research</span>
+                            
+                        </div>
+                    </div>
+                </header>
+
+                <div class="blog-content" id="content">
+                    <!-- Content will be loaded from Markdown file -->
+                    <h1>Building LLMs: From Theory to Practice</h1>
+<p>Large Language Models (LLMs) have revolutionized natural language processing in the past few years. In this post, I&#39;ll explore how these models work and share some insights from my experience building and fine-tuning them.</p>
+<h2>Understanding the Foundation</h2>
+<p>At their core, modern LLMs are based on the Transformer architecture introduced in the landmark paper <a href="https://arxiv.org/abs/1706.03762">&quot;Attention Is All You Need&quot;</a>. This architecture uses a mechanism called <em>self-attention</em> that allows the model to weigh the importance of different words in a sentence when generating or understanding text.</p>
+<p>The key components include:</p>
+<ul>
+<li><strong>Token Embeddings</strong>: Converting words or subwords into vector representations</li>
+<li><strong>Positional Encodings</strong>: Adding information about token positions</li>
+<li><strong>Multi-Head Attention</strong>: Allowing the model to focus on different parts of the input simultaneously</li>
+<li><strong>Feed-Forward Networks</strong>: Processing the attention outputs</li>
+<li><strong>Layer Normalization</strong>: Stabilizing the learning process</li>
+</ul>
+<h2>Scaling Laws and Emergent Abilities</h2>
+<p>One of the most fascinating aspects of LLMs is how they exhibit emergent abilities as they scale. Below a certain size threshold, these models struggle with complex reasoning, but once they reach sufficient scale, they suddenly demonstrate capabilities that weren&#39;t explicitly trained for.</p>
+<p>This chart shows the relationship between model size and performance:</p>
+<table>
+<thead>
+<tr>
+<th>Model Size</th>
+<th>MMLU Score</th>
+<th>GSM8K Score</th>
+<th>Emergent Abilities</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1B params</td>
+<td>26.5%</td>
+<td>7.8%</td>
+<td>Few</td>
+</tr>
+<tr>
+<td>7B params</td>
+<td>43.2%</td>
+<td>25.3%</td>
+<td>Basic reasoning</td>
+</tr>
+<tr>
+<td>13B params</td>
+<td>54.8%</td>
+<td>41.1%</td>
+<td>Chain-of-thought</td>
+</tr>
+<tr>
+<td>70B params</td>
+<td>69.5%</td>
+<td>58.2%</td>
+<td>Advanced reasoning</td>
+</tr>
+</tbody></table>
+<h2>Fine-tuning Strategies</h2>
+<p>In my experience working on LLMs at Stanford, I&#39;ve found several effective approaches to fine-tuning:</p>
+<h3>RLHF (Reinforcement Learning from Human Feedback)</h3>
+<pre><code class="language-python">def rlhf_training_loop(model, preference_data, reward_model):
+    &quot;&quot;&quot;
+    Implement RLHF training loop
+    &quot;&quot;&quot;
+    ppo_trainer = PPOTrainer(model, reward_model)
+    
+    for epoch in range(num_epochs):
+        # Generate responses
+        responses = model.generate(preference_data.prompts)
+        
+        # Compute rewards
+        rewards = reward_model(preference_data.prompts, responses)
+        
+        # Update model with PPO
+        ppo_trainer.step(preference_data.prompts, responses, rewards)
+        
+        # Evaluate
+        if epoch % eval_interval == 0:
+            evaluate_model(model)
+</code></pre>
+<h3>LoRA (Low-Rank Adaptation)</h3>
+<p>LoRA is a parameter-efficient fine-tuning method that&#39;s particularly useful when you have limited compute resources. Instead of updating all weights in the model, it injects trainable low-rank matrices into layers of the model:</p>
+<pre><code class="language-python">class LoRALayer(nn.Module):
+    def __init__(self, in_features, out_features, rank=8, alpha=16):
+        super().__init__()
+        self.A = nn.Parameter(torch.randn(in_features, rank) * 0.01)
+        self.B = nn.Parameter(torch.zeros(rank, out_features))
+        self.alpha = alpha
+        self.rank = rank
+        
+    def forward(self, x):
+        return (x @ self.A @ self.B) * (self.alpha / self.rank)
+</code></pre>
+<h2>Real-world Considerations</h2>
+<p>When deploying LLMs in production, several challenges arise:</p>
+<ol>
+<li><strong>Latency vs. Quality</strong>: Larger models provide better outputs but have higher inference costs and latency</li>
+<li><strong>Alignment with Human Values</strong>: Ensuring models produce helpful, harmless, and honest responses</li>
+<li><strong>Prompt Engineering</strong>: Crafting effective prompts becomes crucial for reliable performance</li>
+<li><strong>Evaluation</strong>: Developing robust evaluation frameworks beyond traditional metrics</li>
+</ol>
+<blockquote>
+<p>&quot;The most important factor in successful LLM deployment isn&#39;t just the model size or architecture—it&#39;s how well you understand your specific use case and constraints.&quot;</p>
+</blockquote>
+<h2>Future Directions</h2>
+<p>As I continue exploring this field, I&#39;m particularly excited about:</p>
+<ul>
+<li><strong>Multimodal Models</strong>: Combining text, vision, and possibly other modalities</li>
+<li><strong>Retrieval-Augmented Generation</strong>: Enhancing LLMs with factual knowledge bases</li>
+<li><strong>Specialized Domain Adaptation</strong>: Creating models that excel in specific domains like medicine or law</li>
+<li><strong>Agent Frameworks</strong>: Building autonomous systems that can reason and act over multiple steps</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Building and fine-tuning LLMs requires balancing theoretical understanding with practical engineering. While the underlying principles are fascinating, the real challenges often lie in data quality, evaluation methodologies, and understanding the specific requirements of your application.</p>
+<p>I hope this overview has been helpful! In future posts, I&#39;ll dive deeper into specific techniques for optimizing LLM performance for specialized tasks.</p>
+<hr>
+<p><em>If you&#39;re interested in discussing LLMs further or have questions about implementation details, feel free to reach out via <a href="mailto:agam2026@stanford.edu">email</a> or connect with me on <a href="https://twitter.com/argent_americi">Twitter</a>.</em></p>
+
+                </div>
+
+                <div class="post-navigation">
+                    
+                    
+                    
+                </div>
+            </article>
+        </main>
+
+        <footer class="container">
+            <p>&copy; 2025 Agam Bhatia</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for dark mode preference
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+            
+            // Apply dark mode if preferred or saved
+            if (savedTheme === 'dark' || (prefersDarkMode && savedTheme !== 'light')) {
+                document.body.classList.add('dark-mode');
+                toggleDarkModeIcons(true);
+            }
+            
+            // Setup dark mode toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', function() {
+                    const isDarkMode = document.body.classList.toggle('dark-mode');
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    toggleDarkModeIcons(isDarkMode);
+                });
+            }
+            
+            function toggleDarkModeIcons(isDarkMode) {
+                const sunIcon = document.querySelector('.sun-icon');
+                const moonIcon = document.querySelector('.moon-icon');
+                
+                if (sunIcon && moonIcon) {
+                    sunIcon.style.display = isDarkMode ? 'none' : 'block';
+                    moonIcon.style.display = isDarkMode ? 'block' : 'none';
+                }
+            }
+            
+            // Highlight.js initialization
+            hljs.highlightAll();
+            
+            // Load the Markdown content
+            fetch('../../blog/posts/markdown/building-llms-from-theory-to-practice.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load content');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Configure marked options
+                    marked.setOptions({
+                        highlight: function(code, lang) {
+                            if (lang && hljs.getLanguage(lang)) {
+                                return hljs.highlight(code, { language: lang }).value;
+                            }
+                            return hljs.highlightAuto(code).value;
+                        },
+                        breaks: true,
+                        gfm: true,
+                        headerIds: true,
+                        mangle: false
+                    });
+                    
+                    // Convert Markdown to HTML
+                    const content = document.getElementById('content');
+                    content.innerHTML = marked.parse(markdown);
+                    
+                    // Highlight code blocks
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightBlock(block);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading markdown content:', error);
+                    document.getElementById('content').innerHTML = '<p>Error loading content. Please try again later.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
